@@ -31,7 +31,7 @@
     "@type": "MedicalWebPage",
     "name": "Rabies Post-Exposure Prophylaxis Vaccination Schedule Calculator",
     "description": "A free calculator to determine rabies post-exposure prophylaxis (PEP) vaccination dates following the Indian 4-dose Essen regimen on Days 0, 3, 7, and 28.",
-    "url": "https://thezerowhisper.github.io/rabies-scheduler/",
+    "url": "https://YOUR-USERNAME.github.io/rabies-scheduler/",
     "inLanguage": "en-IN",
     "about": {
       "@type": "MedicalCondition",
@@ -432,79 +432,6 @@
 
       document.getElementById("results").style.display = "block";
       document.getElementById("results").scrollIntoView({ behavior: "smooth", block: "nearest" });
-    }
-  </script>
-</body>
-</html>    
-    footer {
-      text-align: center;
-      margin-top: 28px;
-      font-size: 0.78rem;
-      color: #a0aec0;
-    }
-  </style>
-</head>
-<body>
-  <div class="card">
-    <div class="logo">💉</div>
-    <h1>Rabies Vaccination Scheduler</h1>
-    <p class="subtitle">Indian post-exposure prophylaxis schedule (Essen regimen)</p>
-
-    <label for="dose0date">Date of First Dose (Day 0)</label>
-    <input type="date" id="dose0date" />
-    <button onclick="calculate()">Calculate Schedule</button>
-
-    <div class="results" id="results">
-      <h2>📅 Vaccination Schedule</h2>
-      <div id="schedule"></div>
-      <div class="note">
-        ⚠️ This schedule follows the <strong>4-dose Essen regimen</strong> used in India (Days 0, 3, 7, 28). Always consult with the treating physician for immunocompromised patients who may require 5 doses.
-      </div>
-    </div>
-
-    <footer>For clinical use only &nbsp;•&nbsp; Always verify with current guidelines</footer>
-  </div>
-
-  <script>
-    const doses = [
-      { label: "Dose 1", day: 0 },
-      { label: "Dose 2", day: 3 },
-      { label: "Dose 3", day: 7 },
-      { label: "Dose 4", day: 28 },
-    ];
-
-    const days = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
-    const months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
-
-    function formatDate(d) {
-      return `${d.getDate()} ${months[d.getMonth()]} ${d.getFullYear()} (${days[d.getDay()]})`;
-    }
-
-    function calculate() {
-      const input = document.getElementById("dose0date").value;
-      if (!input) { alert("Please select the first vaccination date."); return; }
-
-      const base = new Date(input + "T00:00:00");
-      const scheduleDiv = document.getElementById("schedule");
-      scheduleDiv.innerHTML = "";
-
-      doses.forEach((dose, i) => {
-        const date = new Date(base);
-        date.setDate(base.getDate() + dose.day);
-
-        const el = document.createElement("div");
-        el.className = "dose";
-        el.innerHTML = `
-          <div class="dose-badge">${i + 1}</div>
-          <div class="dose-info">
-            <div class="dose-label">${dose.label} &nbsp;<span class="dose-day">Day ${dose.day}</span></div>
-            <div class="dose-date">${formatDate(date)}</div>
-          </div>
-        `;
-        scheduleDiv.appendChild(el);
-      });
-
-      document.getElementById("results").style.display = "block";
     }
   </script>
 </body>
