@@ -11,7 +11,6 @@
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://thezerowhisper.github.io/rabies-scheduler/" />
 
-  <!-- Open Graph -->
   <meta property="og:type" content="website" />
   <meta property="og:title" content="Rabies Vaccination Schedule Calculator — India" />
   <meta property="og:description" content="Enter your first rabies dose date and get all 4 vaccination dates instantly — Days 0, 3, 7, and 28 as per Indian PEP guidelines. Free tool." />
@@ -21,13 +20,11 @@
   <meta property="og:image:height" content="630" />
   <meta property="og:locale" content="en_IN" />
 
-  <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Rabies Vaccination Schedule Calculator — India" />
   <meta name="twitter:description" content="Free tool: Calculate your rabies PEP vaccination dates (Days 0, 3, 7, 28) for Indian Essen regimen." />
   <meta name="twitter:image" content="https://thezerowhisper.github.io/rabies-scheduler/og-image.png" />
 
-  <!-- Structured Data -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -145,6 +142,46 @@
 
     input[type="date"]:focus { border-color: #4299e1; }
 
+    /* --- NEW STYLES FOR ADDED FEATURES --- */
+    .use-today-btn {
+      margin-top: 8px;
+      padding: 6px 12px;
+      background: #edf2f7;
+      border: 1px solid #cbd5e0;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      cursor: pointer;
+      font-weight: 600;
+      color: #4a5568;
+      transition: background 0.2s;
+    }
+    .use-today-btn:hover { background: #e2e8f0; }
+
+    .reminder-text {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #e53e3e; /* Red indicator for reminders */
+      margin-top: 4px;
+    }
+    
+    .cal-link {
+      font-size: 0.85rem;
+      color: #3182ce;
+      text-decoration: none;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 6px;
+      padding: 4px 8px;
+      background: #ebf8ff;
+      border: 1px solid #bee3f8;
+      border-radius: 6px;
+      transition: background 0.2s;
+    }
+    .cal-link:hover { background: #bee3f8; }
+    /* ------------------------------------- */
+
     .calc-btn {
       width: 100%;
       margin-top: 16px;
@@ -174,7 +211,7 @@
 
     .dose {
       display: flex;
-      align-items: center;
+      align-items: flex-start; /* Changed from center to accommodate more text */
       gap: 16px;
       padding: 14px 16px;
       border-radius: 10px;
@@ -194,6 +231,7 @@
       font-weight: 700;
       font-size: 0.9rem;
       flex-shrink: 0;
+      margin-top: 4px; /* Align nicely with text block */
     }
 
     .dose-info { flex: 1; }
@@ -311,7 +349,7 @@
     /* ── PRINT ── */
     @media print {
       .calc-btn, .share-bar, input, label, .subtitle,
-      .info-section, footer, .hero { display: none !important; }
+      .info-section, footer, .hero, .use-today-btn, .cal-link { display: none !important; }
       body { background: white; padding: 0; }
       .card { box-shadow: none; padding: 16px; margin: 0; }
       .results { display: block !important; }
@@ -327,7 +365,6 @@
 <body>
 <main class="page-wrapper">
 
-  <!-- HERO BANNER SVG (also save this separately as og-image.png using a screenshot) -->
   <div class="hero" role="img" aria-label="Rabies vaccination schedule infographic">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 400">
       <defs>
@@ -341,15 +378,12 @@
         </linearGradient>
       </defs>
 
-      <!-- Background -->
       <rect width="1200" height="400" fill="url(#bg)"/>
 
-      <!-- Decorative circles -->
       <circle cx="1100" cy="60" r="120" fill="white" fill-opacity="0.04"/>
       <circle cx="80"   cy="340" r="90"  fill="white" fill-opacity="0.04"/>
       <circle cx="600"  cy="-30" r="200" fill="white" fill-opacity="0.03"/>
 
-      <!-- Title -->
       <text x="600" y="80" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif"
             font-size="42" font-weight="700" fill="white">
         Rabies Vaccination Schedule
@@ -359,11 +393,8 @@
         India · Post-Exposure Prophylaxis · Essen Regimen
       </text>
 
-      <!-- Divider line -->
       <line x1="200" y1="145" x2="1000" y2="145" stroke="white" stroke-opacity="0.2" stroke-width="1"/>
 
-      <!-- Dose cards -->
-      <!-- Card 1 - Day 0 -->
       <rect x="80" y="170" width="230" height="170" rx="16" fill="url(#card)" stroke="white" stroke-opacity="0.2" stroke-width="1"/>
       <circle cx="195" cy="215" r="28" fill="#48bb78"/>
       <text x="195" y="221" text-anchor="middle" font-family="Segoe UI, Arial" font-size="22" font-weight="700" fill="white">1</text>
@@ -371,10 +402,8 @@
       <text x="195" y="291" text-anchor="middle" font-family="Segoe UI, Arial" font-size="28" font-weight="800" fill="#68d391">Day 0</text>
       <text x="195" y="318" text-anchor="middle" font-family="Segoe UI, Arial" font-size="13" fill="#bee3f8">First dose — same day</text>
 
-      <!-- Arrow 1→2 -->
       <text x="330" y="262" text-anchor="middle" font-size="28" fill="white" fill-opacity="0.6">→</text>
 
-      <!-- Card 2 - Day 3 -->
       <rect x="360" y="170" width="230" height="170" rx="16" fill="url(#card)" stroke="white" stroke-opacity="0.2" stroke-width="1"/>
       <circle cx="475" cy="215" r="28" fill="#4299e1"/>
       <text x="475" y="221" text-anchor="middle" font-family="Segoe UI, Arial" font-size="22" font-weight="700" fill="white">2</text>
@@ -382,10 +411,8 @@
       <text x="475" y="291" text-anchor="middle" font-family="Segoe UI, Arial" font-size="28" font-weight="800" fill="#90cdf4">Day 3</text>
       <text x="475" y="318" text-anchor="middle" font-family="Segoe UI, Arial" font-size="13" fill="#bee3f8">3 days after first dose</text>
 
-      <!-- Arrow 2→3 -->
       <text x="610" y="262" text-anchor="middle" font-size="28" fill="white" fill-opacity="0.6">→</text>
 
-      <!-- Card 3 - Day 7 -->
       <rect x="640" y="170" width="230" height="170" rx="16" fill="url(#card)" stroke="white" stroke-opacity="0.2" stroke-width="1"/>
       <circle cx="755" cy="215" r="28" fill="#805ad5"/>
       <text x="755" y="221" text-anchor="middle" font-family="Segoe UI, Arial" font-size="22" font-weight="700" fill="white">3</text>
@@ -393,10 +420,8 @@
       <text x="755" y="291" text-anchor="middle" font-family="Segoe UI, Arial" font-size="28" font-weight="800" fill="#d6bcfa">Day 7</text>
       <text x="755" y="318" text-anchor="middle" font-family="Segoe UI, Arial" font-size="13" fill="#bee3f8">7 days after first dose</text>
 
-      <!-- Arrow 3→4 -->
       <text x="890" y="262" text-anchor="middle" font-size="28" fill="white" fill-opacity="0.6">→</text>
 
-      <!-- Card 4 - Day 28 -->
       <rect x="920" y="170" width="230" height="170" rx="16" fill="url(#card)" stroke="white" stroke-opacity="0.2" stroke-width="1"/>
       <circle cx="1035" cy="215" r="28" fill="#ed8936"/>
       <text x="1035" y="221" text-anchor="middle" font-family="Segoe UI, Arial" font-size="22" font-weight="700" fill="white">4</text>
@@ -404,7 +429,6 @@
       <text x="1035" y="291" text-anchor="middle" font-family="Segoe UI, Arial" font-size="28" font-weight="800" fill="#fbd38d">Day 28</text>
       <text x="1035" y="318" text-anchor="middle" font-family="Segoe UI, Arial" font-size="13" fill="#bee3f8">28 days after first dose</text>
 
-      <!-- Bottom tag -->
       <rect x="400" y="358" width="400" height="32" rx="8" fill="white" fill-opacity="0.1"/>
       <text x="600" y="379" text-anchor="middle" font-family="Segoe UI, Arial" font-size="14" fill="white" fill-opacity="0.85">
         ⚠️  Complete all 4 doses · Rabies is 100% preventable with timely vaccination
@@ -412,7 +436,6 @@
     </svg>
   </div>
 
-  <!-- TOOL CARD -->
   <div class="card">
     <div class="logo">💉</div>
     <h1>Rabies Vaccination Schedule Calculator</h1>
@@ -420,6 +443,9 @@
 
     <label for="dose0date">Date of First Dose (Day 0)</label>
     <input type="date" id="dose0date" aria-label="First rabies vaccination date" />
+    
+    <button class="use-today-btn" onclick="setToday()">Use Today</button>
+
     <button class="calc-btn" onclick="calculate()" aria-label="Calculate rabies vaccination schedule">
       Calculate My Schedule
     </button>
@@ -457,22 +483,26 @@
           </svg>
           Print
         </button>
+        <button class="share-btn btn-save" onclick="saveImage()">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/>
+            <polyline points="7 10 12 15 17 10"/>
+            <line x1="12" y1="15" x2="12" y2="3"/>
+          </svg>
+          Save Image
+        </button>
       </div>
       <div class="copy-confirm" id="copy-confirm"></div>
     </div>
-<!-- Add this 4th button inside .share-bar -->
-<button class="share-btn btn-save" onclick="saveImage()">
-  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-    <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/>
-    <polyline points="7 10 12 15 17 10"/>
-    <line x1="12" y1="15" x2="12" y2="3"/>
-  </svg>
-  Save Image
-</button>
   </div>
 
-  <!-- SEO CONTENT -->
   <section class="info-section" aria-label="About rabies vaccination in India">
+    <h2>Rabies Vaccine Calculator for Dog Bite in India</h2>
+    <p>
+    This free rabies vaccine date calculator helps patients and doctors determine the
+    exact schedule for rabies post-exposure prophylaxis (PEP) in India using the
+    standard Essen regimen.
+    </p>
     <h2>Rabies Vaccination Schedule in India</h2>
     <p>India follows the <strong>4-dose Essen regimen</strong> for post-exposure prophylaxis (PEP) against rabies — the standard protocol recommended by the National Centre for Disease Control (NCDC) and the World Health Organization (WHO) for immunocompetent individuals after animal exposure.</p>
 
@@ -528,6 +558,28 @@
 </main>
 
 <script>
+  // ADDED: Set Today's Date Function
+  function setToday(){
+    const today = new Date().toISOString().split('T')[0];
+    document.getElementById("dose0date").value = today;
+    calculate(); // Auto-calculate when clicked
+  }
+
+  // ADDED: Google Calendar Link Generator
+  function createGoogleCalendarLink(day, dateObj) {
+    const formatCalDate = (d) => d.toISOString().split('T')[0].replace(/-/g, '');
+    const startDate = formatCalDate(dateObj);
+    
+    const nextDay = new Date(dateObj);
+    nextDay.setDate(dateObj.getDate() + 1);
+    const endDate = formatCalDate(nextDay);
+
+    const title = encodeURIComponent(`Rabies Vaccine - Day ${day}`);
+    const details = encodeURIComponent("Reminder for rabies post-exposure prophylaxis dose.");
+
+    return `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${title}&dates=${startDate}/${endDate}&details=${details}`;
+  }
+
   const doses = [
     { label: "Dose 1", day: 0 },
     { label: "Dose 2", day: 3 },
@@ -551,19 +603,46 @@
     scheduleDiv.innerHTML = "";
     window.vaccineSchedule = [];
 
+    // ADDED: Normalize today's date for accurate day-math
+    const today = new Date();
+    today.setHours(0,0,0,0);
+
     doses.forEach((dose, i) => {
       const date = new Date(base);
       date.setDate(base.getDate() + dose.day);
       window.vaccineSchedule.push({ label: dose.label, day: dose.day, date: formatDate(date) });
 
+      // ADDED: Logic for the "Next dose in X days" reminder
+      const timeDiff = date.getTime() - today.getTime();
+      const daysRemaining = Math.ceil(timeDiff / (1000 * 3600 * 24));
+      
+      let reminderHTML = "";
+      if (daysRemaining > 0) {
+          reminderHTML = `<div class="reminder-text">Next dose in ${daysRemaining} days</div>`;
+      } else if (daysRemaining === 0) {
+          reminderHTML = `<div class="reminder-text">Dose is due TODAY</div>`;
+      } else {
+          reminderHTML = `<div class="reminder-text" style="color: #718096;">Dose past due / completed</div>`;
+      }
+
+      // ADDED: Calendar Link
+      const calLink = createGoogleCalendarLink(dose.day, date);
+
       const el = document.createElement("article");
       el.className = "dose";
       el.setAttribute("aria-label", `${dose.label} on ${formatDate(date)}`);
+      
+      // UPDATED: Added reminderHTML and Calendar link inside dose-info
       el.innerHTML = `
         <div class="dose-badge" aria-hidden="true">${i + 1}</div>
         <div class="dose-info">
           <div class="dose-label">${dose.label}&nbsp;<span class="dose-day">Day ${dose.day}</span></div>
           <div class="dose-date">${formatDate(date)}</div>
+          ${reminderHTML}
+          <a href="${calLink}" target="_blank" class="cal-link">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+            Add to Calendar
+          </a>
         </div>`;
       scheduleDiv.appendChild(el);
     });
@@ -590,7 +669,6 @@
     });
   }
 </script>
-<!-- html2canvas library -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 
 <script>
