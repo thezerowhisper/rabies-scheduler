@@ -321,6 +321,7 @@
     @media (max-width: 480px) {
       .card, .info-section { padding: 24px 20px; }
     }
+.btn-save { background: #ed8936; color: white; }
   </style>
 </head>
 <body>
@@ -459,6 +460,15 @@
       </div>
       <div class="copy-confirm" id="copy-confirm"></div>
     </div>
+<!-- Add this 4th button inside .share-bar -->
+<button class="share-btn btn-save" onclick="saveImage()">
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+    <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/>
+    <polyline points="7 10 12 15 17 10"/>
+    <line x1="12" y1="15" x2="12" y2="3"/>
+  </svg>
+  Save Image
+</button>
   </div>
 
   <!-- SEO CONTENT -->
@@ -579,6 +589,38 @@
       setTimeout(() => el.textContent = "", 2500);
     });
   }
+</script>
+<!-- html2canvas library -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+<script>
+function saveImage() {
+  if (!window.vaccineSchedule) {
+    alert("Please calculate your schedule first.");
+    return;
+  }
+
+  const btn = event.target.closest("button");
+  btn.textContent = "Saving...";
+  btn.disabled = true;
+
+  const target = document.getElementById("results");
+
+  html2canvas(target, {
+    backgroundColor: "#ffffff",
+    scale: 2,           // retina quality
+    useCORS: true,
+    padding: 20
+  }).then(canvas => {
+    const link = document.createElement("a");
+    link.download = "rabies-vaccination-schedule.png";
+    link.href = canvas.toDataURL("image/png");
+    link.click();
+
+    btn.innerHTML = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> Save Image`;
+    btn.disabled = false;
+  });
+}
 </script>
 </body>
 </html>
