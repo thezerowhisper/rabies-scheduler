@@ -3,135 +3,216 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Drug Dose Calculator India | Paediatric & Adult | Antibiotics Antipyretics</title>
-<meta name="description" content="Free drug dose calculator for India. Calculate paediatric and adult doses for antibiotics, antipyretics and emergency drugs by weight and age. Includes max dose warnings."/>
-<meta name="keywords" content="drug dose calculator India, paediatric dose calculator, amoxicillin dose calculator, paracetamol dose child, antibiotic dose by weight, mg/kg calculator India"/>
+<title>Drug Dose Calculator India | Paediatric & Adult | By Weight</title>
+<meta name="description" content="Free drug dose calculator for India. Select a medication, enter patient weight and age, and get exact doses with syrup volumes and tablet counts."/>
+<meta name="keywords" content="drug dose calculator India, paediatric dose calculator, amoxicillin dose, paracetamol dose child, antibiotic dose by weight, mg/kg calculator India"/>
 <meta name="robots" content="index, follow"/>
 <link rel="canonical" href="https://thezerowhisper.github.io/rabies-scheduler/doses.html"/>
-<meta property="og:title" content="Drug Dose Calculator India — Paediatric & Adult"/>
-<meta property="og:description" content="Calculate antibiotic, antipyretic and emergency drug doses by weight and age. Free clinical tool for doctors and parents in India."/>
-<meta property="og:type" content="website"/>
-
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "MedicalWebPage",
-  "name": "Drug Dose Calculator India",
-  "description": "Paediatric and adult drug dose calculator for common medications used in India including antibiotics, antipyretics and emergency drugs.",
-  "url": "https://thezerowhisper.github.io/rabies-scheduler/doses.html",
-  "inLanguage": "en-IN",
-  "audience": {"@type": "MedicalAudience", "audienceType": "Physician, Patient"}
-}
-</script>
 
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:'Segoe UI',sans-serif;background:#f0f4f8;padding:20px;color:#2d3748}
-.page-wrapper{max-width:640px;margin:auto}
+.page-wrapper{max-width:600px;margin:auto}
 
-/* NAV BACK */
-.back-link{display:inline-flex;align-items:center;gap:6px;margin-bottom:16px;color:#3182ce;font-size:0.9rem;font-weight:600;text-decoration:none}
+.back-link{
+  display:inline-flex;align-items:center;gap:6px;
+  margin-bottom:16px;color:#3182ce;font-size:0.9rem;
+  font-weight:600;text-decoration:none
+}
 .back-link:hover{text-decoration:underline}
 
-.card{background:white;border-radius:16px;padding:36px;box-shadow:0 4px 24px rgba(0,0,0,0.08);margin-bottom:24px}
+.card{
+  background:white;border-radius:16px;padding:36px;
+  box-shadow:0 4px 24px rgba(0,0,0,0.08);margin-bottom:24px
+}
+
 .logo{font-size:2rem;text-align:center;margin-bottom:8px}
 h1{font-size:1.4rem;text-align:center;margin-bottom:4px;color:#1a202c}
 .subtitle{text-align:center;font-size:0.88rem;color:#718096;margin-bottom:28px}
 
-.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px}
+.form-row{margin-bottom:16px}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:16px}
 @media(max-width:480px){.form-grid{grid-template-columns:1fr}}
 
 label{display:block;font-weight:600;font-size:0.9rem;margin-bottom:6px;color:#2d3748}
-input[type=number], select{
+.label-optional{font-weight:400;font-size:0.78rem;color:#a0aec0;margin-left:6px}
+
+input[type=number],select{
   width:100%;padding:11px 14px;border:2px solid #e2e8f0;
-  border-radius:10px;font-size:1rem;color:#2d3748;outline:none;
-  transition:border-color 0.2s;background:white
+  border-radius:10px;font-size:1rem;color:#2d3748;
+  outline:none;transition:border-color 0.2s;background:white
 }
-input[type=number]:focus, select:focus{border-color:#4299e1}
+input[type=number]:focus,select:focus{border-color:#4299e1}
+
+/* DRUG SELECTOR */
+.drug-select-wrapper{position:relative}
+select.drug-select{
+  appearance:none;padding-right:36px;
+  font-size:0.95rem
+}
+.select-arrow{
+  position:absolute;right:14px;top:50%;
+  transform:translateY(-50%);pointer-events:none;color:#718096
+}
+
+/* CONCENTRATION BOX */
+.concentration-box{
+  background:#f7fafc;border:2px dashed #e2e8f0;
+  border-radius:12px;padding:16px;margin-bottom:16px
+}
+.concentration-box .box-title{
+  font-size:0.82rem;font-weight:700;
+  color:#718096;margin-bottom:12px;
+  text-transform:uppercase;letter-spacing:0.06em
+}
+.conc-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:480px){.conc-grid{grid-template-columns:1fr}}
+
+.conc-hint{
+  font-size:0.78rem;color:#a0aec0;
+  margin-top:6px;line-height:1.5
+}
+
+/* DIVIDER */
+.divider{
+  display:flex;align-items:center;gap:10px;
+  margin:6px 0 16px;color:#a0aec0;font-size:0.8rem
+}
+.divider::before,.divider::after{
+  content:'';flex:1;height:1px;background:#e2e8f0
+}
 
 .calc-btn{
-  margin-top:4px;width:100%;padding:13px;
-  background:#3182ce;color:white;border:none;
-  border-radius:10px;font-weight:600;font-size:1rem;cursor:pointer
+  width:100%;padding:13px;background:#3182ce;
+  color:white;border:none;border-radius:10px;
+  font-weight:600;font-size:1rem;cursor:pointer;
+  transition:background 0.2s
 }
 .calc-btn:hover{background:#2b6cb0}
 
 /* RESULTS */
 .results{margin-top:28px;display:none}
-.results-header{
-  font-size:1rem;font-weight:700;
-  margin-bottom:16px;padding-bottom:10px;
-  border-bottom:2px solid #e2e8f0;color:#2d3748
+
+.result-header{
+  display:flex;align-items:center;gap:10px;
+  margin-bottom:20px;padding-bottom:12px;
+  border-bottom:2px solid #e2e8f0
+}
+.result-drug-name{font-size:1.1rem;font-weight:700;color:#1a202c}
+.result-meta{font-size:0.82rem;color:#718096;margin-top:2px}
+
+/* DOSE HIGHLIGHT */
+.dose-highlight{
+  background:linear-gradient(135deg,#ebf8ff,#e6fffa);
+  border:2px solid #bee3f8;border-radius:14px;
+  padding:20px;margin-bottom:16px;text-align:center
+}
+.dose-number{font-size:2.2rem;font-weight:800;color:#2b6cb0;line-height:1}
+.dose-unit{font-size:1rem;color:#4a5568;margin-top:4px}
+.dose-calc{font-size:0.82rem;color:#718096;margin-top:6px}
+.dose-capped{
+  margin-top:8px;font-size:0.82rem;font-weight:700;
+  color:#c05621;background:#feebc8;
+  padding:4px 10px;border-radius:20px;display:inline-block
 }
 
-.drug-card{
-  border-radius:12px;padding:16px 18px;
-  margin-bottom:12px;border-left:4px solid #3182ce;
-  background:#ebf8ff
-}
-.drug-card.warning{border-left-color:#e53e3e;background:#fff5f5}
-.drug-card.caution{border-left-color:#dd6b20;background:#fffaf0}
-
-.drug-name{font-weight:700;font-size:1rem;color:#1a202c;margin-bottom:8px}
-
-.drug-detail{
-  display:flex;justify-content:space-between;
-  font-size:0.88rem;padding:4px 0;
-  border-bottom:1px solid rgba(0,0,0,0.06)
-}
-.drug-detail:last-child{border-bottom:none}
-.detail-label{color:#718096;font-weight:500}
-.detail-value{color:#2d3748;font-weight:600;text-align:right;max-width:60%}
-
-.max-warning{
-  margin-top:8px;padding:8px 10px;
-  background:#fed7d7;border-radius:8px;
-  font-size:0.8rem;color:#c53030;font-weight:600
-}
-
-.section-title{
-  font-size:0.78rem;font-weight:700;
+/* DETAIL ROWS */
+.detail-section{margin-bottom:16px}
+.detail-section-title{
+  font-size:0.75rem;font-weight:700;
   text-transform:uppercase;letter-spacing:0.08em;
-  color:#a0aec0;margin:20px 0 10px
+  color:#a0aec0;margin-bottom:8px
+}
+.detail-row{
+  display:flex;justify-content:space-between;align-items:flex-start;
+  padding:10px 0;border-bottom:1px solid #f0f4f8;font-size:0.9rem
+}
+.detail-row:last-child{border-bottom:none}
+.detail-label{color:#718096;font-weight:500;flex-shrink:0;margin-right:12px}
+.detail-value{color:#2d3748;font-weight:600;text-align:right}
+
+/* FORMULATION CARDS */
+.formulation-grid{
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));
+  gap:10px;margin-top:8px
+}
+.form-card{
+  background:#f7fafc;border:2px solid #e2e8f0;
+  border-radius:10px;padding:12px;text-align:center
+}
+.form-card.custom{border-color:#4299e1;background:#ebf8ff}
+.form-card-label{font-size:0.75rem;color:#718096;margin-bottom:4px}
+.form-card-value{font-size:1.3rem;font-weight:800;color:#2b6cb0}
+.form-card-unit{font-size:0.75rem;color:#4a5568;margin-top:2px}
+.form-card-note{font-size:0.7rem;color:#a0aec0;margin-top:4px}
+
+/* WARNING BOX */
+.warning-box{
+  background:#fff5f5;border:1px solid #fed7d7;
+  border-radius:10px;padding:12px 14px;
+  font-size:0.82rem;color:#c53030;margin-bottom:14px
+}
+.warning-box.emergency{
+  background:#fffaf0;border-color:#fbd38d;color:#744210
 }
 
-.note{
-  margin-top:16px;background:#fffaf0;
-  border:1px solid #fbd38d;padding:12px;
-  border-radius:10px;font-size:0.82rem;color:#744210
+.note-box{
+  background:#fffaf0;border:1px solid #fbd38d;
+  border-radius:10px;padding:12px 14px;
+  font-size:0.82rem;color:#744210;margin-bottom:14px
 }
 
 /* SHARE BAR */
 .share-bar{display:flex;gap:10px;margin-top:16px;flex-wrap:wrap}
 .share-btn{
-  flex:1;min-width:110px;padding:11px 12px;
+  flex:1;min-width:100px;padding:10px 12px;
   border:none;border-radius:10px;font-size:0.85rem;
   font-weight:600;cursor:pointer;
-  display:flex;align-items:center;justify-content:center;gap:6px
+  display:flex;align-items:center;justify-content:center;gap:6px;
+  transition:opacity 0.2s
 }
 .share-btn:hover{opacity:0.85}
 .btn-whatsapp{background:#25D366;color:white}
 .btn-copy{background:#edf2f7;color:#2d3748}
 .btn-print{background:#667eea;color:white}
 .btn-save{background:#ed8936;color:white}
-.copy-confirm{text-align:center;font-size:0.8rem;color:#38a169;margin-top:8px;height:18px}
+.copy-confirm{
+  text-align:center;font-size:0.8rem;
+  color:#38a169;margin-top:8px;height:18px
+}
 
 /* INFO */
-.info-section{background:white;padding:30px;border-radius:16px;box-shadow:0 4px 24px rgba(0,0,0,0.05);margin-bottom:24px}
-.info-section h2{margin-top:18px;margin-bottom:8px;font-size:1rem;color:#1a202c}
-.info-section p{font-size:0.9rem;color:#4a5568;line-height:1.7;margin-bottom:8px}
+.info-section{
+  background:white;padding:28px 30px;
+  border-radius:16px;
+  box-shadow:0 4px 24px rgba(0,0,0,0.05);
+  margin-bottom:24px
+}
+.info-section h2{
+  font-size:1rem;color:#1a202c;
+  margin-top:18px;margin-bottom:6px
+}
+.info-section h2:first-child{margin-top:0}
+.info-section p{
+  font-size:0.88rem;color:#4a5568;
+  line-height:1.7
+}
 
-footer{text-align:center;margin-top:8px;font-size:0.78rem;color:#a0aec0;padding-bottom:20px}
+footer{
+  text-align:center;padding-bottom:20px;
+  font-size:0.78rem;color:#a0aec0
+}
+footer a{color:#3182ce}
 
 @media print{
-  button,.share-bar,input,select,label,.subtitle,.back-link{display:none!important}
+  .back-link,button,.share-bar,
+  input,select,label,.subtitle,
+  .concentration-box,.calc-btn{display:none!important}
   .card{box-shadow:none;padding:10px}
-  .drug-card{break-inside:avoid}
 }
 </style>
 </head>
 <body>
-
 <main class="page-wrapper">
 
   <a class="back-link" href="index.html">← Rabies Vaccine Scheduler</a>
@@ -139,430 +220,534 @@ footer{text-align:center;margin-top:8px;font-size:0.78rem;color:#a0aec0;padding-
   <div class="card">
     <div class="logo">💊</div>
     <h1>Drug Dose Calculator</h1>
-    <p class="subtitle">India · Paediatric & Adult · Antibiotics · Antipyretics · Emergency</p>
+    <p class="subtitle">India · Paediatric & Adult · Weight-Based Dosing</p>
 
+    <!-- PATIENT INFO -->
     <div class="form-grid">
       <div>
         <label for="weight">Weight (kg)</label>
-        <input type="number" id="weight" placeholder="e.g. 15" min="0.5" max="150" step="0.1"/>
+        <input type="number" id="weight" placeholder="e.g. 15" min="0.5" max="200" step="0.1"/>
       </div>
       <div>
         <label for="age">Age</label>
-        <input type="number" id="age" placeholder="e.g. 5" min="0" max="100" step="0.5"/>
-      </div>
-      <div>
-        <label for="age-unit">Age Unit</label>
-        <select id="age-unit">
-          <option value="years">Years</option>
-          <option value="months">Months</option>
-        </select>
-      </div>
-      <div>
-        <label for="category">Drug Category</label>
-        <select id="category">
-          <option value="all">All Categories</option>
-          <option value="antipyretic">Antipyretics</option>
-          <option value="antibiotic">Antibiotics</option>
-          <option value="emergency">Emergency Drugs</option>
-        </select>
+        <div style="display:flex;gap:8px">
+          <input type="number" id="age" placeholder="e.g. 5" min="0" max="100" step="0.5" style="flex:1"/>
+          <select id="age-unit" style="width:100px">
+            <option value="years">Yrs</option>
+            <option value="months">Mos</option>
+          </select>
+        </div>
       </div>
     </div>
 
-    <button class="calc-btn" onclick="calculate()">Calculate Doses</button>
+    <!-- DRUG SELECTOR -->
+    <div class="form-row">
+      <label for="drug-select">Select Medication</label>
+      <div class="drug-select-wrapper">
+        <select class="drug-select" id="drug-select" onchange="onDrugChange()">
+          <option value="">— Choose a drug —</option>
+          <optgroup label="🌡️ Antipyretics">
+            <option value="paracetamol">Paracetamol (Calpol, Dolo)</option>
+            <option value="ibuprofen">Ibuprofen (Brufen, Combiflam base)</option>
+          </optgroup>
+          <optgroup label="💊 Antibiotics">
+            <option value="amoxicillin">Amoxicillin</option>
+            <option value="coamoxiclav">Amoxicillin-Clavulanate (Co-amoxiclav)</option>
+            <option value="azithromycin">Azithromycin</option>
+            <option value="metronidazole">Metronidazole (Flagyl)</option>
+            <option value="cetirizine">Cetirizine (Antihistamine)</option>
+          </optgroup>
+          <optgroup label="🚨 Emergency">
+            <option value="adrenaline">Adrenaline / Epinephrine</option>
+            <option value="salbutamol">Salbutamol (Bronchospasm)</option>
+            <option value="diazepam">Diazepam (Seizures)</option>
+            <option value="ors">ORS (Rehydration)</option>
+          </optgroup>
+        </select>
+        <span class="select-arrow">▾</span>
+      </div>
+    </div>
 
+    <!-- CONCENTRATION (optional) -->
+    <div class="concentration-box" id="conc-box" style="display:none">
+      <div class="box-title">Your Medicine's Concentration <span style="font-weight:400;text-transform:none;letter-spacing:0">(optional)</span></div>
+      <div class="conc-grid">
+        <div>
+          <label>Syrup / Liquid <span class="label-optional">mg per ml</span></label>
+          <input type="number" id="custom-mgPerMl" placeholder="e.g. 50" min="0" step="0.1"/>
+          <div class="conc-hint">Found on bottle label<br>e.g. "250mg/5ml" → enter 50</div>
+        </div>
+        <div>
+          <label>Tablet / Capsule <span class="label-optional">mg per tab</span></label>
+          <input type="number" id="custom-mgPerTab" placeholder="e.g. 500" min="0" step="1"/>
+          <div class="conc-hint">Found on strip/blister<br>e.g. "500mg tablet" → enter 500</div>
+        </div>
+      </div>
+    </div>
+
+    <button class="calc-btn" onclick="calculate()">Calculate Dose</button>
+
+    <!-- RESULTS -->
     <div class="results" id="results">
-      <div class="results-header">📋 Calculated Doses</div>
-      <div id="drug-results"></div>
 
-      <div class="note">
-        ⚠️ <strong>Clinical use only.</strong> Always verify doses against current formulary. 
-        Adjust for renal/hepatic impairment. Max doses shown — do not exceed.
-        This tool does not replace clinical judgement.
+      <div class="result-header">
+        <div>
+          <div class="result-drug-name" id="result-drug-name"></div>
+          <div class="result-meta" id="result-meta"></div>
+        </div>
       </div>
 
+      <!-- DOSE HIGHLIGHT -->
+      <div class="dose-highlight" id="dose-highlight"></div>
+
+      <!-- WARNING -->
+      <div id="warning-area"></div>
+
+      <!-- DETAILS -->
+      <div class="detail-section">
+        <div class="detail-section-title">Dosing Details</div>
+        <div id="detail-rows"></div>
+      </div>
+
+      <!-- FORMULATIONS -->
+      <div class="detail-section" id="form-section">
+        <div class="detail-section-title">Formulation Volumes</div>
+        <div class="formulation-grid" id="form-grid"></div>
+      </div>
+
+      <!-- NOTE -->
+      <div class="note-box" id="result-notes"></div>
+
+      <!-- SHARE -->
       <div class="share-bar">
         <button class="share-btn btn-whatsapp" onclick="shareWhatsApp()">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
           WhatsApp
         </button>
-        <button class="share-btn btn-copy" onclick="copyDoses()">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+        <button class="share-btn btn-copy" onclick="copyDose()">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
           Copy
         </button>
         <button class="share-btn btn-print" onclick="window.print()">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
           Print
         </button>
         <button class="share-btn btn-save" onclick="saveImage()">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
           Save
         </button>
       </div>
       <div class="copy-confirm" id="copy-confirm"></div>
-    </div>
-  </div>
+
+    </div><!-- /results -->
+  </div><!-- /card -->
 
   <section class="info-section">
     <h2>About This Calculator</h2>
-    <p>This drug dose calculator provides weight-based and age-based dosing for common medications used in India, following standard Indian and WHO guidelines.</p>
-    <h2>How to Use</h2>
-    <p>Enter the patient's weight in kg and age, select a drug category, and click Calculate. The tool will show the calculated dose, maximum dose, formulation volumes, and frequency.</p>
+    <p>This tool calculates weight-based drug doses for common medications used in India for both paediatric and adult patients. Enter the patient's weight, select the drug, and optionally enter your medicine's concentration to get the exact volume or tablet count.</p>
+    <h2>How to Read Your Medicine Label</h2>
+    <p>For syrups, the concentration is usually written as "Xmg/5ml" — divide X by 5 to get mg/ml. For example, Paracetamol 250mg/5ml = 50 mg/ml. For tablets, the strength is printed on the strip (e.g. "500mg").</p>
     <h2>Disclaimer</h2>
-    <p>This tool is intended for use by qualified healthcare professionals. Always cross-check doses against current prescribing guidelines and adjust for individual patient factors.</p>
+    <p>For use by qualified healthcare professionals. Always verify doses and adjust for renal/hepatic impairment, allergies, and clinical context. This tool does not replace clinical judgement.</p>
   </section>
 
-  <footer>For clinical use only · Always verify with current formulary · <a href="index.html" style="color:#3182ce">Rabies Scheduler</a></footer>
+  <footer>
+    For clinical use only &nbsp;·&nbsp; Always verify with current formulary &nbsp;·&nbsp;
+    <a href="index.html">Rabies Scheduler</a>
+  </footer>
 
 </main>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-
 <script>
-// ─── DRUG DATABASE ───────────────────────────────────────────────
-const drugs = [
 
-  // ── ANTIPYRETICS ──
-  {
-    name: "Paracetamol (Acetaminophen)",
-    category: "antipyretic",
+// ── DRUG DATABASE ─────────────────────────────────────────────────
+const DRUGS = {
+  paracetamol: {
+    name: "Paracetamol",
+    brands: "Calpol, Dolo, Crocin",
+    category: "Antipyretic / Analgesic",
     mgPerKg: 15,
     maxDoseMg: 1000,
     maxDailyMg: 4000,
     frequency: "Every 4–6 hours",
-    duration: "Until fever resolves (max 3 days without review)",
+    duration: "Max 3 days without review",
+    minAgeMonths: 0,
+    isEmergency: false,
     formulations: [
+      { label: "Syrup 125mg/5ml", mgPerMl: 25 },
       { label: "Syrup 250mg/5ml", mgPerMl: 50 },
-      { label: "Tablet 500mg", mgPerTab: 500 },
-      { label: "Tablet 650mg", mgPerTab: 650 }
+      { label: "Tablet 500mg",    mgPerTab: 500 },
+      { label: "Tablet 650mg",    mgPerTab: 650 }
     ],
-    notes: "Do not exceed 4g/day in adults. Reduce dose in liver disease.",
-    minAgeMonths: 0
+    notes: "Safe first-line antipyretic. Avoid in severe liver disease. Do not exceed 4g/day in adults."
   },
-  {
+  ibuprofen: {
     name: "Ibuprofen",
-    category: "antipyretic",
+    brands: "Brufen, Ibugesic",
+    category: "NSAID · Antipyretic / Analgesic",
     mgPerKg: 10,
     maxDoseMg: 400,
     maxDailyMg: 1200,
     frequency: "Every 6–8 hours",
-    duration: "Max 3 days for fever, 5 days for pain",
+    duration: "Max 3 days (fever) · 5 days (pain)",
+    minAgeMonths: 6,
+    isEmergency: false,
     formulations: [
       { label: "Syrup 100mg/5ml", mgPerMl: 20 },
-      { label: "Tablet 200mg", mgPerTab: 200 },
-      { label: "Tablet 400mg", mgPerTab: 400 }
+      { label: "Tablet 200mg",    mgPerTab: 200 },
+      { label: "Tablet 400mg",    mgPerTab: 400 }
     ],
-    notes: "Avoid in children under 6 months, renal impairment, asthma. Take with food.",
-    minAgeMonths: 6
+    notes: "Avoid under 6 months, renal impairment, peptic ulcer, asthma. Always give with food."
   },
-
-  // ── ANTIBIOTICS ──
-  {
+  amoxicillin: {
     name: "Amoxicillin",
-    category: "antibiotic",
+    brands: "Novamox, Mox, Amoxil",
+    category: "Antibiotic · Penicillin",
     mgPerKg: 25,
     maxDoseMg: 500,
     maxDailyMg: 3000,
     frequency: "Every 8 hours (TDS)",
-    duration: "5–7 days (7–10 days for severe infections)",
+    duration: "5–7 days (up to 10 days for severe)",
+    minAgeMonths: 0,
+    isEmergency: false,
     formulations: [
       { label: "Syrup 125mg/5ml", mgPerMl: 25 },
       { label: "Syrup 250mg/5ml", mgPerMl: 50 },
-      { label: "Capsule 250mg", mgPerTab: 250 },
-      { label: "Capsule 500mg", mgPerTab: 500 }
+      { label: "Capsule 250mg",   mgPerTab: 250 },
+      { label: "Capsule 500mg",   mgPerTab: 500 }
     ],
-    notes: "First-line for many common infections. Check for penicillin allergy.",
-    minAgeMonths: 0
+    notes: "Check for penicillin allergy before prescribing. First-line for many common infections."
   },
-  {
-    name: "Amoxicillin-Clavulanate (Co-amoxiclav)",
-    category: "antibiotic",
+  coamoxiclav: {
+    name: "Amoxicillin-Clavulanate",
+    brands: "Augmentin, Clavam, Moxclav",
+    category: "Antibiotic · Penicillin + Beta-lactamase inhibitor",
     mgPerKg: 25,
-    maxDoseMg: 625,
-    maxDailyMg: 1875,
-    frequency: "Every 8 hours (TDS)",
+    maxDoseMg: 875,
+    maxDailyMg: 2625,
+    frequency: "Every 8–12 hours",
     duration: "5–7 days",
+    minAgeMonths: 0,
+    isEmergency: false,
     formulations: [
       { label: "Syrup 228mg/5ml", mgPerMl: 45.6 },
-      { label: "Tablet 625mg", mgPerTab: 625 }
+      { label: "Tablet 625mg",    mgPerTab: 625 },
+      { label: "Tablet 1000mg",   mgPerTab: 1000 }
     ],
-    notes: "Dose refers to amoxicillin component. Use for animal bites, resistant infections.",
-    minAgeMonths: 0
+    notes: "Dose based on amoxicillin component. Preferred for animal bites, resistant infections. Take with food."
   },
-  {
+  azithromycin: {
     name: "Azithromycin",
-    category: "antibiotic",
+    brands: "Azithral, Zithromax, Azifast",
+    category: "Antibiotic · Macrolide",
     mgPerKg: 10,
     maxDoseMg: 500,
     maxDailyMg: 500,
     frequency: "Once daily (OD)",
-    duration: "3 days (or 5 days for some indications)",
+    duration: "3 days (standard) · 5 days (some indications)",
+    minAgeMonths: 6,
+    isEmergency: false,
     formulations: [
       { label: "Syrup 200mg/5ml", mgPerMl: 40 },
-      { label: "Tablet 250mg", mgPerTab: 250 },
-      { label: "Tablet 500mg", mgPerTab: 500 }
+      { label: "Tablet 250mg",    mgPerTab: 250 },
+      { label: "Tablet 500mg",    mgPerTab: 500 }
     ],
-    notes: "Once daily dosing. Good for atypical pneumonia, skin infections.",
-    minAgeMonths: 6
+    notes: "Once daily dosing improves compliance. Good for atypical pneumonia, pharyngitis, skin infections."
   },
-  {
-    name: "Cetirizine (for allergic reactions)",
-    category: "antibiotic",
-    mgPerKg: 0.25,
-    maxDoseMg: 10,
-    maxDailyMg: 10,
-    frequency: "Once daily (OD)",
-    duration: "As needed / per physician advice",
-    formulations: [
-      { label: "Syrup 5mg/5ml", mgPerMl: 1 },
-      { label: "Tablet 10mg", mgPerTab: 10 }
-    ],
-    notes: "Antihistamine. Use for allergic rhinitis, urticaria. Non-sedating.",
-    minAgeMonths: 12
-  },
-  {
+  metronidazole: {
     name: "Metronidazole",
-    category: "antibiotic",
+    brands: "Flagyl, Metrogyl, Aldezol",
+    category: "Antibiotic · Antiprotozoal",
     mgPerKg: 7.5,
     maxDoseMg: 400,
     maxDailyMg: 2400,
     frequency: "Every 8 hours (TDS)",
     duration: "5–7 days",
+    minAgeMonths: 0,
+    isEmergency: false,
     formulations: [
       { label: "Syrup 200mg/5ml", mgPerMl: 40 },
-      { label: "Tablet 200mg", mgPerTab: 200 },
-      { label: "Tablet 400mg", mgPerTab: 400 }
+      { label: "Tablet 200mg",    mgPerTab: 200 },
+      { label: "Tablet 400mg",    mgPerTab: 400 }
     ],
-    notes: "For anaerobic infections, dental infections, giardia. Avoid alcohol.",
-    minAgeMonths: 0
+    notes: "For anaerobic infections, giardia, amoebiasis. Strict alcohol avoidance during course."
   },
-
-  // ── EMERGENCY ──
-  {
-    name: "Adrenaline / Epinephrine (Anaphylaxis)",
-    category: "emergency",
+  cetirizine: {
+    name: "Cetirizine",
+    brands: "Zyrtec, Cetcip, Alerid",
+    category: "Antihistamine · H1 blocker",
+    mgPerKg: 0.25,
+    maxDoseMg: 10,
+    maxDailyMg: 10,
+    frequency: "Once daily (OD)",
+    duration: "As directed by physician",
+    minAgeMonths: 12,
+    isEmergency: false,
+    formulations: [
+      { label: "Syrup 5mg/5ml",  mgPerMl: 1 },
+      { label: "Tablet 10mg",    mgPerTab: 10 }
+    ],
+    notes: "Non-sedating antihistamine. For allergic rhinitis, urticaria, atopic dermatitis. Not for children under 1 year."
+  },
+  adrenaline: {
+    name: "Adrenaline (Epinephrine)",
+    brands: "Adrenaline 1:1000",
+    category: "Emergency · Anaphylaxis",
     mgPerKg: 0.01,
     maxDoseMg: 0.5,
     maxDailyMg: null,
     frequency: "Single dose IM — repeat after 5–15 min if needed",
     duration: "Emergency use only",
-    formulations: [
-      { label: "1:1000 solution (1mg/ml)", mgPerMl: 1, note: "IM into outer thigh" }
-    ],
-    notes: "⚠️ EMERGENCY ONLY. Give IM into anterolateral thigh. Call emergency services.",
     minAgeMonths: 0,
-    isEmergency: true
+    isEmergency: true,
+    formulations: [
+      { label: "1:1000 (1mg/ml)", mgPerMl: 1, note: "IM anterolateral thigh" }
+    ],
+    notes: "⚠️ EMERGENCY ONLY. Inject IM into outer thigh. Call emergency services immediately. Have resuscitation equipment ready."
   },
-  {
-    name: "Salbutamol / Albuterol (Bronchospasm)",
-    category: "emergency",
+  salbutamol: {
+    name: "Salbutamol (Albuterol)",
+    brands: "Asthalin, Ventolin, Salbu",
+    category: "Emergency · Bronchodilator",
     mgPerKg: 0.15,
     maxDoseMg: 5,
     maxDailyMg: null,
-    frequency: "Every 20 min for first hour if needed",
-    duration: "As needed",
-    formulations: [
-      { label: "Nebuliser 5mg/ml", mgPerMl: 5, note: "Dilute in 2.5ml normal saline" },
-      { label: "MDI 100mcg/puff", mgPerTab: 0.1, note: "2–4 puffs via spacer" }
-    ],
-    notes: "For acute bronchospasm/asthma. Monitor heart rate.",
+    frequency: "Every 20 min × 3 doses if needed",
+    duration: "As needed · Refer if no improvement",
     minAgeMonths: 0,
-    isEmergency: true
+    isEmergency: true,
+    formulations: [
+      { label: "Nebuliser 5mg/ml", mgPerMl: 5, note: "Dilute in 2.5ml NS" },
+      { label: "MDI 100mcg/puff",  mgPerTab: 0.1, note: "2–4 puffs via spacer" }
+    ],
+    notes: "For acute bronchospasm / asthma attack. Monitor heart rate. Refer to hospital if severe."
   },
-  {
-    name: "Diazepam (Seizures)",
-    category: "emergency",
+  diazepam: {
+    name: "Diazepam",
+    brands: "Valium, Calmpose, Paxum",
+    category: "Emergency · Anticonvulsant",
     mgPerKg: 0.3,
     maxDoseMg: 10,
     maxDailyMg: null,
     frequency: "Single dose — repeat once after 5 min if seizure continues",
     duration: "Emergency use only",
-    formulations: [
-      { label: "Rectal solution 5mg/2.5ml", mgPerMl: 2, note: "PR route preferred in children" },
-      { label: "IV 5mg/ml", mgPerMl: 5, note: "IV/IO in hospital setting" }
-    ],
-    notes: "⚠️ EMERGENCY ONLY. Have resuscitation equipment ready. Monitor respiration.",
     minAgeMonths: 0,
-    isEmergency: true
+    isEmergency: true,
+    formulations: [
+      { label: "Rectal 5mg/2.5ml", mgPerMl: 2,   note: "PR route preferred in children" },
+      { label: "IV 5mg/ml",        mgPerMl: 5,   note: "IV/IO in hospital only" }
+    ],
+    notes: "⚠️ EMERGENCY ONLY. Monitor respiration closely. Have airway support available. Do not give more than 2 doses."
   },
-  {
+  ors: {
     name: "Oral Rehydration Solution (ORS)",
-    category: "emergency",
+    brands: "Electral, ORS WHO, Enerlyte",
+    category: "Rehydration",
     mgPerKg: null,
     maxDoseMg: null,
     maxDailyMg: null,
     isVolumeBased: true,
-    frequency: "Small sips frequently",
-    duration: "Until diarrhoea resolves",
+    frequency: "Small frequent sips — not large boluses",
+    duration: "Until diarrhoea/vomiting resolves",
+    minAgeMonths: 0,
+    isEmergency: false,
     formulations: [],
-    notes: "Give 50–100ml/kg over 3–4 hours for mild-moderate dehydration.",
-    minAgeMonths: 0
+    notes: "Mild dehydration: 50ml/kg over 3–4 hrs. Moderate: 100ml/kg over 3–4 hrs. Continue breastfeeding if applicable."
   }
-];
+};
 
-// ─── GLOBALS ─────────────────────────────────────────────────────
-let currentResults = [];
+// ── STATE ─────────────────────────────────────────────────────────
+let shareText = "";
 
-// ─── MAIN CALCULATE ──────────────────────────────────────────────
-function calculate() {
-  const weightVal = parseFloat(document.getElementById("weight").value);
-  const ageVal    = parseFloat(document.getElementById("age").value);
-  const ageUnit   = document.getElementById("age-unit").value;
-  const category  = document.getElementById("category").value;
-
-  if (!weightVal || weightVal <= 0) { alert("Please enter a valid weight."); return; }
-  if (!ageVal || ageVal < 0)        { alert("Please enter a valid age."); return; }
-
-  const ageMonths = ageUnit === "years" ? ageVal * 12 : ageVal;
-  const filtered  = category === "all" ? drugs : drugs.filter(d => d.category === category);
-
-  const resultsDiv = document.getElementById("drug-results");
-  resultsDiv.innerHTML = "";
-  currentResults = [];
-
-  // Group by category
-  const groups = { antipyretic: [], antibiotic: [], emergency: [] };
-  filtered.forEach(drug => {
-    if (drug.minAgeMonths !== undefined && ageMonths < drug.minAgeMonths) return;
-    groups[drug.category].push(drug);
-  });
-
-  const labels = { antipyretic: "🌡️ Antipyretics", antibiotic: "💊 Antibiotics", emergency: "🚨 Emergency Drugs" };
-
-  Object.entries(groups).forEach(([cat, list]) => {
-    if (!list.length) return;
-
-    const title = document.createElement("div");
-    title.className = "section-title";
-    title.textContent = labels[cat];
-    resultsDiv.appendChild(title);
-
-    list.forEach(drug => {
-      const card = buildDrugCard(drug, weightVal, ageMonths);
-      resultsDiv.appendChild(card.el);
-      currentResults.push(card.text);
-    });
-  });
-
-  document.getElementById("results").style.display = "block";
-  document.getElementById("results").scrollIntoView({ behavior: "smooth", block: "nearest" });
+// ── SHOW CONCENTRATION BOX WHEN DRUG SELECTED ────────────────────
+function onDrugChange() {
+  const key = document.getElementById("drug-select").value;
+  document.getElementById("conc-box").style.display = key ? "block" : "none";
+  document.getElementById("results").style.display = "none";
+  // clear custom fields
+  document.getElementById("custom-mgPerMl").value = "";
+  document.getElementById("custom-mgPerTab").value = "";
 }
 
-// ─── BUILD DRUG CARD ─────────────────────────────────────────────
-function buildDrugCard(drug, weight, ageMonths) {
-  let calculatedMg = null;
-  let isMaxCapped  = false;
-  let cardClass    = "drug-card";
-  let textLines    = [`${drug.name}`];
+// ── MAIN CALCULATE ────────────────────────────────────────────────
+function calculate() {
+  const weight  = parseFloat(document.getElementById("weight").value);
+  const age     = parseFloat(document.getElementById("age").value);
+  const ageUnit = document.getElementById("age-unit").value;
+  const key     = document.getElementById("drug-select").value;
 
+  if (!weight || weight <= 0) { alert("Please enter a valid weight."); return; }
+  if (!age    || age    <  0) { alert("Please enter a valid age."); return; }
+  if (!key)                   { alert("Please select a medication."); return; }
+
+  const drug      = DRUGS[key];
+  const ageMonths = ageUnit === "years" ? age * 12 : age;
+
+  if (ageMonths < drug.minAgeMonths) {
+    alert(`${drug.name} is not recommended for children under ${drug.minAgeMonths >= 12 ? drug.minAgeMonths/12 + " year(s)" : drug.minAgeMonths + " month(s)"} old.`);
+    return;
+  }
+
+  // Custom concentrations (optional)
+  const customMgPerMl  = parseFloat(document.getElementById("custom-mgPerMl").value)  || null;
+  const customMgPerTab = parseFloat(document.getElementById("custom-mgPerTab").value) || null;
+
+  renderResults(drug, weight, age, ageUnit, ageMonths, customMgPerMl, customMgPerTab);
+}
+
+// ── RENDER ────────────────────────────────────────────────────────
+function renderResults(drug, weight, age, ageUnit, ageMonths, customMgPerMl, customMgPerTab) {
+
+  // Header
+  document.getElementById("result-drug-name").textContent = drug.name;
+  document.getElementById("result-meta").textContent =
+    `${drug.brands} · ${drug.category} · Patient: ${weight}kg, ${age} ${ageUnit}`;
+
+  // ORS special case
   if (drug.isVolumeBased) {
-    // ORS special case
     const low  = Math.round(weight * 50);
     const high = Math.round(weight * 100);
-    textLines.push(`Volume: ${low}–${high} ml over 3–4 hours`);
-    textLines.push(`Frequency: ${drug.frequency}`);
-    textLines.push(`Note: ${drug.notes}`);
 
-    const el = document.createElement("div");
-    el.className = cardClass;
-    el.innerHTML = `
-      <div class="drug-name">${drug.name}</div>
-      ${row("Volume (mild-mod dehydration)", `${low}–${high} ml over 3–4 hrs`)}
-      ${row("Frequency", drug.frequency)}
-      ${row("Duration", drug.duration)}
-      ${row("Note", drug.notes)}
+    document.getElementById("dose-highlight").innerHTML = `
+      <div class="dose-number">${low}–${high}</div>
+      <div class="dose-unit">ml of ORS</div>
+      <div class="dose-calc">50–100 ml/kg × ${weight} kg · over 3–4 hours</div>
     `;
-    return { el, text: textLines.join("\n") };
+    document.getElementById("warning-area").innerHTML = "";
+    document.getElementById("detail-rows").innerHTML =
+      row("Frequency", drug.frequency) +
+      row("Duration",  drug.duration);
+    document.getElementById("form-section").style.display = "none";
+    document.getElementById("result-notes").innerHTML = "💡 " + drug.notes;
+    shareText = buildShareText(drug, weight, age, ageUnit, `${low}–${high} ml`, [], drug.frequency, drug.duration);
+    showResults();
+    return;
   }
 
-  // Normal mg/kg calc
-  calculatedMg = Math.round(drug.mgPerKg * weight * 10) / 10;
+  // Standard mg/kg calc
+  let calcMg    = Math.round(drug.mgPerKg * weight * 10) / 10;
+  let isCapped  = false;
 
-  if (drug.maxDoseMg && calculatedMg > drug.maxDoseMg) {
-    calculatedMg = drug.maxDoseMg;
-    isMaxCapped  = true;
-    cardClass   += " caution";
+  if (drug.maxDoseMg && calcMg > drug.maxDoseMg) {
+    calcMg   = drug.maxDoseMg;
+    isCapped = true;
   }
 
-  if (drug.isEmergency) cardClass = "drug-card warning";
-
-  // Build formulation strings
-  let formLines = drug.formulations.map(f => {
-    if (f.mgPerMl) {
-      const vol = Math.round((calculatedMg / f.mgPerMl) * 10) / 10;
-      return `${f.label}: <strong>${vol} ml</strong>${f.note ? " — " + f.note : ""}`;
-    } else if (f.mgPerTab) {
-      const tabs = Math.round((calculatedMg / f.mgPerTab) * 4) / 4; // round to 0.25
-      return `${f.label}: <strong>${tabs} tab${tabs !== 1 ? "s" : ""}</strong>`;
-    }
-    return f.label;
-  }).join("<br>");
-
-  const maxDailyText = drug.maxDailyMg
-    ? `${drug.maxDailyMg} mg/day`
-    : "See notes";
-
-  textLines.push(`Dose: ${calculatedMg} mg${isMaxCapped ? " (max dose)" : ""}`);
-  textLines.push(`Frequency: ${drug.frequency}`);
-  textLines.push(`Duration: ${drug.duration}`);
-  drug.formulations.forEach(f => {
-    if (f.mgPerMl) {
-      const vol = Math.round((calculatedMg / f.mgPerMl) * 10) / 10;
-      textLines.push(`${f.label}: ${vol} ml`);
-    } else if (f.mgPerTab) {
-      const tabs = Math.round((calculatedMg / f.mgPerTab) * 4) / 4;
-      textLines.push(`${f.label}: ${tabs} tab(s)`);
-    }
-  });
-  textLines.push(`Note: ${drug.notes}`);
-
-  const el = document.createElement("div");
-  el.className = cardClass;
-  el.innerHTML = `
-    <div class="drug-name">${drug.name}${drug.isEmergency ? " ⚠️" : ""}</div>
-    ${row("Calculated Dose", `<strong>${calculatedMg} mg</strong> (${drug.mgPerKg} mg/kg × ${weight} kg)${isMaxCapped ? ' — <span style="color:#c05621">max dose applied</span>' : ""}`)}
-    ${row("Max Single Dose", `${drug.maxDoseMg} mg`)}
-    ${row("Max Daily Dose", maxDailyText)}
-    ${row("Frequency", drug.frequency)}
-    ${row("Duration", drug.duration)}
-    ${formLines ? row("Formulations", formLines) : ""}
-    ${row("Notes", drug.notes)}
-    ${isMaxCapped ? `<div class="max-warning">⚠️ Dose capped at maximum — do not exceed ${drug.maxDoseMg} mg per dose</div>` : ""}
+  // Dose highlight
+  document.getElementById("dose-highlight").innerHTML = `
+    <div class="dose-number">${calcMg}</div>
+    <div class="dose-unit">mg per dose</div>
+    <div class="dose-calc">${drug.mgPerKg} mg/kg × ${weight} kg${isCapped ? " → capped at max" : ""}</div>
+    ${isCapped ? `<div class="dose-capped">⚠️ Max dose applied — do not exceed ${drug.maxDoseMg} mg</div>` : ""}
   `;
 
-  return { el, text: textLines.join("\n") };
+  // Warning area
+  let warningHTML = "";
+  if (drug.isEmergency) {
+    warningHTML = `<div class="warning-box">🚨 Emergency medication — use only in acute setting with monitoring. Call emergency services.</div>`;
+  }
+  if (isCapped) {
+    warningHTML += `<div class="warning-box emergency">⚠️ Calculated dose exceeded maximum. Dose has been capped at ${drug.maxDoseMg} mg per dose.</div>`;
+  }
+  document.getElementById("warning-area").innerHTML = warningHTML;
+
+  // Detail rows
+  document.getElementById("detail-rows").innerHTML =
+    row("Frequency",     drug.frequency) +
+    row("Duration",      drug.duration) +
+    row("Max per dose",  drug.maxDoseMg + " mg") +
+    (drug.maxDailyMg ? row("Max per day", drug.maxDailyMg + " mg") : "");
+
+  // Formulations
+  const formGrid = document.getElementById("form-grid");
+  formGrid.innerHTML = "";
+  document.getElementById("form-section").style.display = "block";
+
+  const formLines = [];
+
+  // Custom concentrations first (if entered)
+  if (customMgPerMl) {
+    const vol = Math.round((calcMg / customMgPerMl) * 10) / 10;
+    formGrid.innerHTML += formCard(`Your syrup<br>(${customMgPerMl} mg/ml)`, vol, "ml", "", true);
+    formLines.push(`Your syrup (${customMgPerMl} mg/ml): ${vol} ml`);
+  }
+  if (customMgPerTab) {
+    const tabs = Math.round((calcMg / customMgPerTab) * 4) / 4;
+    formGrid.innerHTML += formCard(`Your tablet<br>(${customMgPerTab} mg)`, tabs, tabs === 1 ? "tablet" : "tablets", "", true);
+    formLines.push(`Your tablet (${customMgPerTab} mg): ${tabs} tab(s)`);
+  }
+
+  // Standard formulations
+  drug.formulations.forEach(f => {
+    if (f.mgPerMl) {
+      const vol  = Math.round((calcMg / f.mgPerMl) * 10) / 10;
+      formGrid.innerHTML += formCard(f.label, vol, "ml", f.note || "");
+      formLines.push(`${f.label}: ${vol} ml${f.note ? " (" + f.note + ")" : ""}`);
+    } else if (f.mgPerTab) {
+      const tabs = Math.round((calcMg / f.mgPerTab) * 4) / 4;
+      formGrid.innerHTML += formCard(f.label, tabs, tabs === 1 ? "tablet" : "tablets", f.note || "");
+      formLines.push(`${f.label}: ${tabs} tab(s)`);
+    }
+  });
+
+  // Notes
+  document.getElementById("result-notes").innerHTML = "💡 " + drug.notes;
+
+  // Share text
+  shareText = buildShareText(drug, weight, age, ageUnit, `${calcMg} mg`, formLines, drug.frequency, drug.duration);
+
+  showResults();
+}
+
+function showResults() {
+  const r = document.getElementById("results");
+  r.style.display = "block";
+  r.scrollIntoView({ behavior: "smooth", block: "nearest" });
 }
 
 function row(label, value) {
-  return `<div class="drug-detail"><span class="detail-label">${label}</span><span class="detail-value">${value}</span></div>`;
+  return `<div class="detail-row"><span class="detail-label">${label}</span><span class="detail-value">${value}</span></div>`;
 }
 
-// ─── SHARE FUNCTIONS ─────────────────────────────────────────────
+function formCard(label, value, unit, note, isCustom) {
+  return `
+    <div class="form-card${isCustom ? " custom" : ""}">
+      <div class="form-card-label">${label}</div>
+      <div class="form-card-value">${value}</div>
+      <div class="form-card-unit">${unit}</div>
+      ${note ? `<div class="form-card-note">${note}</div>` : ""}
+    </div>`;
+}
+
+function buildShareText(drug, weight, age, ageUnit, dose, formLines, freq, duration) {
+  let t = `💊 Drug Dose — ${drug.name}\n`;
+  t += `Patient: ${weight} kg, ${age} ${ageUnit}\n\n`;
+  t += `Dose: ${dose}\n`;
+  t += `Frequency: ${freq}\n`;
+  t += `Duration: ${duration}\n`;
+  if (formLines.length) { t += `\nFormulations:\n` + formLines.map(l => `• ${l}`).join("\n"); }
+  t += `\n\nCalculated at: ${window.location.href}`;
+  return t;
+}
+
+// ── SHARE FUNCTIONS ───────────────────────────────────────────────
 function shareWhatsApp() {
-  if (!currentResults.length) return;
-  const weight = document.getElementById("weight").value;
-  const age    = document.getElementById("age").value;
-  const unit   = document.getElementById("age-unit").value;
-  const header = `💊 *Drug Dose Calculator*\nPatient: ${weight} kg, ${age} ${unit}\n\n`;
-  const body   = currentResults.join("\n\n---\n");
-  const footer = `\n\nCalculated at: ${window.location.href}`;
-  window.open("https://wa.me/?text=" + encodeURIComponent(header + body + footer), "_blank", "noopener");
+  if (!shareText) { alert("Please calculate a dose first."); return; }
+  window.open("https://wa.me/?text=" + encodeURIComponent(shareText), "_blank", "noopener");
 }
 
-function copyDoses() {
-  if (!currentResults.length) return;
-  const weight = document.getElementById("weight").value;
-  const age    = document.getElementById("age").value;
-  const unit   = document.getElementById("age-unit").value;
-  const text   = `Drug Doses — ${weight}kg, ${age} ${unit}\n\n` + currentResults.join("\n\n---\n");
-  navigator.clipboard.writeText(text);
+function copyDose() {
+  if (!shareText) { alert("Please calculate a dose first."); return; }
+  navigator.clipboard.writeText(shareText);
   const el = document.getElementById("copy-confirm");
   el.textContent = "✓ Copied to clipboard!";
   setTimeout(() => el.textContent = "", 2500);
 }
 
 function saveImage() {
-  if (!currentResults.length) { alert("Please calculate doses first."); return; }
-  const btn = event.target.closest("button");
+  if (!shareText) { alert("Please calculate a dose first."); return; }
+  const btn  = event.target.closest("button");
   const orig = btn.innerHTML;
   btn.textContent = "Saving...";
   btn.disabled = true;
@@ -570,13 +755,14 @@ function saveImage() {
     backgroundColor: "#ffffff", scale: 2, useCORS: true
   }).then(canvas => {
     const link = document.createElement("a");
-    link.download = "drug-doses.png";
-    link.href = canvas.toDataURL("image/png");
+    link.download = "drug-dose.png";
+    link.href     = canvas.toDataURL("image/png");
     link.click();
     btn.innerHTML = orig;
-    btn.disabled = false;
+    btn.disabled  = false;
   });
 }
+
 </script>
 </body>
 </html>
